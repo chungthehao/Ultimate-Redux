@@ -1,17 +1,7 @@
-import store from "./store";
+import store from "./customStore";
 
-import { bugAdded, bugRemoved, bugResolved } from "./actions";
+console.log(store.getState());
 
-// Truyền hàm callback mình muốn nó chạy khi store thay đổi
-const unsubscribe = store.subscribe(() => {
-  console.log("%cStore changed!", "background:yellow;font-size:20px");
-  console.log(store.getState());
-});
-
-store.dispatch(bugAdded("Bug No.1"));
-
-unsubscribe(); // Store sau này có thay đổi cũng ko biết, vì unsubscribe rồi
-
-store.dispatch(bugResolved(1));
+store.state = 6969;
 
 console.log(store.getState());
