@@ -1,6 +1,6 @@
 import store from "./store";
 
-import { bugAdded, bugRemoved } from "./actions";
+import { bugAdded, bugRemoved, bugResolved } from "./actions";
 
 // Truyền hàm callback mình muốn nó chạy khi store thay đổi
 const unsubscribe = store.subscribe(() => {
@@ -8,12 +8,10 @@ const unsubscribe = store.subscribe(() => {
   console.log(store.getState());
 });
 
-// Dispatch 'bugAdded' action
 store.dispatch(bugAdded("Bug No.1"));
 
 unsubscribe(); // Store sau này có thay đổi cũng ko biết, vì unsubscribe rồi
 
-// Dispatch 'bugRemoved' action
-store.dispatch(bugRemoved(1));
+store.dispatch(bugResolved(1));
 
 console.log(store.getState());
