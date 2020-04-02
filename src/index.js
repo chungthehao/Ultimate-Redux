@@ -1,5 +1,7 @@
 import store from "./store";
 
+import * as actions from "./actionTypes";
+
 // Truyền hàm callback mình muốn nó chạy khi store thay đổi
 const unsubscribe = store.subscribe(() => {
   console.log("%cStore changed!", "background:yellow;font-size:20px");
@@ -8,7 +10,7 @@ const unsubscribe = store.subscribe(() => {
 
 // Dispatch 'bugAdded' action
 store.dispatch({
-  type: "bugAdded",
+  type: actions.BUG_ADDED,
   payload: {
     description: "Bug1"
   }
@@ -18,7 +20,7 @@ unsubscribe(); // Store sau này có thay đổi cũng ko biết, vì unsubscrib
 
 // Dispatch 'bugRemoved' action
 store.dispatch({
-  type: "bugRemoved",
+  type: actions.BUG_REMOVED,
   payload: {
     id: 1
   }

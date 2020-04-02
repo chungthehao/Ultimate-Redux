@@ -1,9 +1,11 @@
+import * as actions from "./actionTypes";
+
 let lastId = 0;
 
 // Reducer in Redux have to be a pure function.
 export default function reducer(state = [], action) {
   switch (action.type) {
-    case "bugAdded":
+    case actions.BUG_ADDED:
       return [
         ...state,
         {
@@ -12,7 +14,7 @@ export default function reducer(state = [], action) {
           description: action.payload.description
         }
       ];
-    case "bugRemoved":
+    case actions.BUG_REMOVED:
       return state.filter(bug => bug.id !== action.payload.id);
     default:
       return state;
