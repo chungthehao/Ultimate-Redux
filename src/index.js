@@ -1,10 +1,8 @@
 import store from "./store";
 import * as actions from "./actions";
 
-store.subscribe(() => {
-  console.log("Store changed!");
-});
+store.dispatch(actions.bugAdded("Bug 1"));
+store.dispatch(actions.bugAdded("Bug 2"));
+store.dispatch(actions.bugAdded("Bug 3"));
 
-console.log("Store not changed yet!");
-
-store.dispatch(actions.bugAdded("A new bug"));
+store.dispatch(actions.bugResolved(1));
