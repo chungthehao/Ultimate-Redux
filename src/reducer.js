@@ -1,7 +1,7 @@
 let lastId = 0;
 
 // Reducer in Redux have to be a pure function.
-function reducer(state = [], action) {
+export default function reducer(state = [], action) {
   switch (action.type) {
     case "bugAdded":
       return [
