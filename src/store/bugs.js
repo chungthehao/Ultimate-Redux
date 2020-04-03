@@ -2,36 +2,19 @@
 // 1. Reducer phải là default export từ module này.
 // 2. Phải export mỗi action creator ra ngoài.
 
-/**
- * Action Types
- */
-const BUG_ADDED = "bugAdded";
-const BUG_REMOVED = "bugRemoved";
-const BUG_RESOLVED = "bugResolved";
+import { createAction } from "@reduxjs/toolkit";
+
+// const hamTaoLao = createAction("ABC"); // type -> 'ABC'
+// console.log(hamTaoLao({ id: 321 })); // { type: 'ABC', payload: { id: 321 } }
+// console.log(hamTaoLao.type); // ABC
+// console.log(hamTaoLao.toString()); // ABC
 
 /**
  * Action Creators
  */
-export const bugAdded = description => ({
-  type: BUG_ADDED,
-  payload: {
-    description
-  }
-});
-
-export const bugRemoved = id => ({
-  type: BUG_REMOVED,
-  payload: {
-    id
-  }
-});
-
-export const bugResolved = id => ({
-  type: BUG_RESOLVED,
-  payload: {
-    id
-  }
-});
+export const bugAdded = createAction("bugAdded");
+export const bugRemoved = createAction("bugRemoved");
+export const bugResolved = createAction("bugResolved");
 
 /**
  * Reducer
@@ -40,7 +23,7 @@ let lastId = 0;
 // Reducer in Redux have to be a pure function.
 export default function reducer(state = [], action) {
   switch (action.type) {
-    case BUG_ADDED:
+    case bugAdded.type:
       return [
         ...state,
         {
@@ -50,10 +33,10 @@ export default function reducer(state = [], action) {
         }
       ];
 
-    case BUG_REMOVED:
+    case bugRemoved.type:
       return state.filter(bug => bug.id !== action.payload.id);
 
-    case BUG_RESOLVED:
+    case bugResolved.type:
       return state.map(bug =>
         bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
       );
