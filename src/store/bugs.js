@@ -31,62 +31,6 @@ const slice = createSlice({
 export const { bugAdded, bugRemoved, bugResolved } = slice.actions;
 export default slice.reducer;
 
-/**
- * Action Creators
- */
-// export const bugAdded = createAction("bugAdded");
-// export const bugRemoved = createAction("bugRemoved");
-// export const bugResolved = createAction("bugResolved");
-
-/**
- * Reducer
- */
-
-// Reducer in Redux have to be a pure function.
-
-// export default createReducer([], {
-//   // key: value
-//   // actions: functions ~ (event: event handler)
-//   [bugAdded.type]: (bugs, action) => {
-//     bugs.push({
-//       id: ++lastId,
-//       resolved: false,
-//       description: action.payload.description
-//     });
-//   },
-
-//   [bugRemoved.type]: (bugs, action) => {
-//     const index = bugs.findIndex(bug => bug.id === action.payload.id);
-//     bugs.splice(index, 1);
-//   },
-
-//   [bugResolved.type]: (bugs, action) => {
-//     const index = bugs.findIndex(bug => bug.id === action.payload.id);
-//     bugs[index].resolved = true;
-//   }
-// });
-
-// export default function reducer(state = [], action) {
-//   switch (action.type) {
-//     case bugAdded.type:
-//       return [
-//         ...state,
-//         {
-//           id: ++lastId,
-//           resolved: false,
-//           description: action.payload.description
-//         }
-//       ];
-
-//     case bugRemoved.type:
-//       return state.filter(bug => bug.id !== action.payload.id);
-
-//     case bugResolved.type:
-//       return state.map(bug =>
-//         bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
-//       );
-
-//     default:
-//       return state;
-//   }
-// }
+// Selector (1 hàm nhận state => computed state)
+export const getUnresolvedBugs = state =>
+  state.entities.bugs.filter(b => !b.resolved);
