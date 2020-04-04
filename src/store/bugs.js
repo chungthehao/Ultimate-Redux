@@ -2,7 +2,7 @@
 // 1. Reducer phải là default export từ module này.
 // 2. Phải export mỗi action creator ra ngoài.
 
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createReducer } from "@reduxjs/toolkit";
 
 // const hamTaoLao = createAction("ABC"); // type -> 'ABC'
 // console.log(hamTaoLao({ id: 321 })); // { type: 'ABC', payload: { id: 321 } }
@@ -21,27 +21,50 @@ export const bugResolved = createAction("bugResolved");
  */
 let lastId = 0;
 // Reducer in Redux have to be a pure function.
-export default function reducer(state = [], action) {
-  switch (action.type) {
-    case bugAdded.type:
-      return [
-        ...state,
-        {
-          id: ++lastId,
-          resolved: false,
-          description: action.payload.description
-        }
-      ];
 
-    case bugRemoved.type:
-      return state.filter(bug => bug.id !== action.payload.id);
+export default createReducer([], {
+  // key: value
+  // actions: functions ~ (event: event handler)
+  [bugAdded.type]: (bugs, action) => {
+    bugs.push({
+      id: ++lastId,
+      resolved: false,
+      description: action.payload.description
+    });
+  },
 
-    case bugResolved.type:
-      return state.map(bug =>
-        bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
-      );
+  [bugRemoved.type]: (bugs, action) => {
+    const index = bugs.findIndex(bug => bug.id === action.payload.id);
+    bugs.splice(index, 1);
+  },
 
-    default:
-      return state;
+  [bugResolved.type]: (bugs, action) => {
+    const index = bugs.findIndex(bug => bug.id === action.payload.id);
+    bugs[index].resolved = true;
   }
-}
+});
+
+// export default function reducer(state = [], action) {
+//   switch (action.type) {
+//     case bugAdded.type:
+//       return [
+//         ...state,
+//         {
+//           id: ++lastId,
+//           resolved: false,
+//           description: action.payload.description
+//         }
+//       ];
+
+//     case bugRemoved.type:
+//       return state.filter(bug => bug.id !== action.payload.id);
+
+//     case bugResolved.type:
+//       return state.map(bug =>
+//         bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
+//       );
+
+//     default:
+//       return state;
+//   }
+// }
