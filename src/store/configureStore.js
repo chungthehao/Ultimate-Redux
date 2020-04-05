@@ -9,6 +9,6 @@ export default function() {
   //return createStore(reducer, devToolsEnhancer({ trace: true }));
   return configureStore({
     reducer,
-    middleware: [logger]
+    middleware: [logger({ destination: "console" })]
   });
 }
