@@ -11,9 +11,17 @@ import { userAdded } from "./store/users";
 
 const store = configureStore();
 
+store.dispatch((dispatch, getState) => {
+  dispatch({
+    type: "bugsReceived",
+    bugs: [1, 2, 3]
+  });
+  console.log(getState());
+});
+
 // *** USERS ***
-store.dispatch(userAdded({ name: "User 1" }));
-store.dispatch(userAdded({ name: "User 2" }));
+// store.dispatch(userAdded({ name: "User 1" }));
+// store.dispatch(userAdded({ name: "User 2" }));
 
 // *** PROJECTS ***
 // store.dispatch(projectAdded({ name: "Project 1" }));
