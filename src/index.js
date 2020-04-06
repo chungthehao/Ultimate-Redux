@@ -8,17 +8,17 @@ import {
 } from "./store/bugs";
 import { projectAdded } from "./store/projects";
 import { userAdded } from "./store/users";
+import { apiCallBegan } from "./store/api";
 
 const store = configureStore();
 
-store.dispatch({
-  type: "apiCallBegan",
-  payload: {
+store.dispatch(
+  apiCallBegan({
     url: "/bugs",
     onSuccess: "bugsReceived", // type action mà sẽ dispatch khi api này resolved
-    onError: "apiRequestFailed", // type action mà sẽ dispatch khi api này bị rejected
-  },
-});
+    // onError: "mySpecificApiCallFailedActionType", // type action mà sẽ dispatch khi api này bị rejected
+  })
+);
 
 // store.dispatch({
 //   type: "error",
