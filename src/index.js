@@ -1,7 +1,7 @@
 import configureStore from "./store/configureStore";
-import { loadBugs, addBug } from "./store/bugs";
+import { assignBugToUser, loadBugs } from "./store/bugs";
 
 const store = configureStore();
 
-store.dispatch(addBug({ description: "Bug 4" }));
-// store.dispatch(loadBugs());
+store.dispatch(loadBugs());
+store.dispatch(assignBugToUser({ bugId: 4, userId: 6 }));
