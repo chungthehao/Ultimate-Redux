@@ -4,25 +4,34 @@ import {
   bugResolved,
   bugAssignedToUser,
   getUnresolvedBugs,
-  getBugsByUser
+  getBugsByUser,
 } from "./store/bugs";
 import { projectAdded } from "./store/projects";
 import { userAdded } from "./store/users";
 
 const store = configureStore();
 
+store.dispatch({
+  type: "apiCallBegan",
+  payload: {
+    url: "/bugs",
+    onSuccess: "bugsReceived", // type action mà sẽ dispatch khi api này resolved
+    onError: "apiRequestFailed", // type action mà sẽ dispatch khi api này bị rejected
+  },
+});
+
 // store.dispatch({
 //   type: "error",
 //   payload: { message: "An error occurred." }
 // });
 
-store.dispatch((dispatch, getState) => {
-  dispatch({
-    type: "bugsReceived",
-    bugs: [1, 2, 3]
-  });
-  console.log(getState());
-});
+// store.dispatch((dispatch, getState) => {
+//   dispatch({
+//     type: "bugsReceived",
+//     bugs: [1, 2, 3]
+//   });
+//   console.log(getState());
+// });
 
 // *** USERS ***
 // store.dispatch(userAdded({ name: "User 1" }));
