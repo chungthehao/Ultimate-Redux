@@ -7,8 +7,6 @@ import moment from "moment";
 
 import { apiCallBegan } from "./api";
 
-let lastId = 0;
-
 const slice = createSlice({
   name: "bugs",
   initialState: {
@@ -29,11 +27,7 @@ const slice = createSlice({
       bugs.lastFetch = Date.now();
     },
     bugAdded: (bugs, action) => {
-      bugs.list.push({
-        id: ++lastId,
-        resolved: false,
-        description: action.payload.description,
-      });
+      bugs.list.push(action.payload);
     },
     bugRemoved: (bugs, action) => {
       const index = bugs.list.findIndex((bug) => bug.id === action.payload.id);
@@ -82,6 +76,14 @@ export const loadBugs = () => (dispatch, getState) => {
     })
   );
 };
+
+export const addBug = (bug) =>
+  apiCallBegan({
+    url,
+    method: "post",
+    data: bug,
+    onSuccess: bugAdded.type,
+  });
 
 /**
  * Dùng createSelector để cache
