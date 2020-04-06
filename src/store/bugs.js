@@ -4,6 +4,8 @@
 
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 
+import { apiCallBegan } from "./api";
+
 let lastId = 0;
 
 const slice = createSlice({
@@ -14,6 +16,9 @@ const slice = createSlice({
     lastFetch: null,
   },
   reducers: {
+    bugsReceived: (bugs, action) => {
+      bugs.list = action.payload;
+    },
     bugAdded: (bugs, action) => {
       bugs.list.push({
         id: ++lastId,
@@ -42,8 +47,21 @@ export const {
   bugRemoved,
   bugResolved,
   bugAssignedToUser,
+  bugsReceived,
 } = slice.actions;
 export default slice.reducer;
+
+/**
+ * Action creators
+ */
+const url = "/bugs";
+
+export const loadBugs = () =>
+  apiCallBegan({
+    url,
+    onSuccess: bugsReceived.type, // type action mà sẽ dispatch khi api này resolved
+    // onError: "mySpecificApiCallFailedActionType", // type action mà sẽ dispatch khi api này bị rejected
+  });
 
 /**
  * Dùng createSelector để cache
