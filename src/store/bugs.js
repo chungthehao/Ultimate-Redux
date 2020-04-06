@@ -3,6 +3,7 @@
 // 2. Phải export mỗi action creator ra ngoài.
 
 import { createSlice, createSelector } from "@reduxjs/toolkit";
+import moment from "moment";
 
 import { apiCallBegan } from "./api";
 
@@ -25,6 +26,7 @@ const slice = createSlice({
     bugsReceived: (bugs, action) => {
       bugs.list = action.payload;
       bugs.loading = false;
+      bugs.lastFetch = Date.now();
     },
     bugAdded: (bugs, action) => {
       bugs.list.push({
@@ -65,13 +67,21 @@ export default slice.reducer;
  */
 const url = "/bugs";
 
-export const loadBugs = () =>
-  apiCallBegan({
-    url,
-    onStart: bugsRequested.type,
-    onSuccess: bugsReceived.type, // type action mà sẽ dispatch khi api này resolved
-    onError: bugsRequestFailed.type, // type action mà sẽ dispatch khi api này bị rejected
-  });
+export const loadBugs = () => (dispatch, getState) => {
+  const { lastFetch } = getState().entities.bugs;
+
+  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
+  if (diffInMinutes < 10) return;
+
+  dispatch(
+    apiCallBegan({
+      url,
+      onStart: bugsRequested.type,
+      onSuccess: bugsReceived.type, // type action mà sẽ dispatch khi api này resolved
+      onError: bugsRequestFailed.type, // type action mà sẽ dispatch khi api này bị rejected
+    })
+  );
+};
 
 /**
  * Dùng createSelector để cache
