@@ -46,7 +46,8 @@ const slice = createSlice({
   },
 });
 
-export const {
+// Những cái này chỉ xài nội bộ, là implementation detail, có thể thay đổi in the future, ko nên export ra.
+const {
   bugAdded,
   bugRemoved,
   bugResolved,
