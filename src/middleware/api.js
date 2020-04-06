@@ -18,13 +18,16 @@ import { apiCallSuccess, apiCallFailed, apiCallBegan } from "../store/api";
 const api = (store) => (next) => async (action) => {
   if (action.type !== apiCallBegan.type) return next(action);
 
-  next(action);
   const { dispatch, getState } = store;
-  const { url, method, data, onSuccess, onError } = action.payload;
+  const { url, method, data, onStart, onSuccess, onError } = action.payload;
+
+  if (onStart) dispatch({ type: onStart });
+
+  next(action);
 
   try {
     const res = await axios.request({
-      baseURL: "http://localhost:9001/api",
+      baseURL: "http://localhost:9002/api",
       url,
       method,
       data,
