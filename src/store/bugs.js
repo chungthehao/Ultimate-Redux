@@ -4,6 +4,7 @@
 
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 import moment from "moment";
+import axios from "axios";
 
 import { apiCallBegan } from "./api";
 
@@ -47,7 +48,7 @@ const slice = createSlice({
 });
 
 // Những cái này chỉ xài nội bộ, là implementation detail, có thể thay đổi in the future, ko nên export ra.
-const {
+export const {
   bugAdded,
   bugRemoved,
   bugResolved,
@@ -84,13 +85,23 @@ export const loadBugs = () => (dispatch, getState) => {
  * command - event
  * what needs to be done - what just happened
  */
-export const addBug = (bug) =>
-  apiCallBegan({
-    url,
-    method: "post",
-    data: bug,
-    onSuccess: bugAdded.type,
-  });
+// export const addBug = (bug) =>
+//   apiCallBegan({
+//     url,
+//     method: "post",
+//     data: bug,
+//     onSuccess: bugAdded.type,
+//   });
+// - Another implementation of this action creator, for demo cause breaking solitary test.
+// - The behavior is the same
+export const addBug = async (bug) => {
+  try {
+    const res = await axios.post(url, bug);
+    dispatch(bugAdded(res.data));
+  } catch (err) {
+    dispatch({ type: "Error", payload: err.message });
+  }
+};
 
 export const assignBugToUser = ({ bugId, userId }) =>
   apiCallBegan({

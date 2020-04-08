@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { apiCallSuccess, apiCallFailed, apiCallBegan } from "../store/api";
+import { apiCallSuccess, apiCallFailed, apiCallBegan } from "../api";
 
 // * Action object này nên serilizable để mà store nó đc (nên onSuccess, onError có value là string, ko phải func)
 // const action = {
