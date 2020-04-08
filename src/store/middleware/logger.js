@@ -1,7 +1,7 @@
-const logger = param => store => next => action => {
-  console.log("logging", param);
+const logger = (param) => (store) => (next) => (action) => {
+  console.log("LOGGING", action);
 
-  next(action);
+  return next(action);
 };
 
 export default logger;
