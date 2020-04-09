@@ -85,23 +85,23 @@ export const loadBugs = () => (dispatch, getState) => {
  * command - event
  * what needs to be done - what just happened
  */
-// export const addBug = (bug) =>
-//   apiCallBegan({
-//     url,
-//     method: "post",
-//     data: bug,
-//     onSuccess: bugAdded.type,
-//   });
+export const addBug = (bug) =>
+  apiCallBegan({
+    url,
+    method: "post",
+    data: bug,
+    onSuccess: bugAdded.type,
+  });
 // - Another implementation of this action creator, for demo cause breaking solitary test but not in social test.
 // - The behavior is the same
-export const addBug = (bug) => async (dispatch, getState) => {
-  try {
-    const res = await axios.post("http://localhost:9001/api/bugs", bug);
-    dispatch(bugAdded(res.data));
-  } catch (err) {
-    dispatch({ type: "Error", payload: err.message });
-  }
-};
+// export const addBug = (bug) => async (dispatch, getState) => {
+//   try {
+//     const res = await axios.post("http://localhost:9001/api/bugs", bug);
+//     dispatch(bugAdded(res.data));
+//   } catch (err) {
+//     dispatch({ type: "Error", payload: err.message });
+//   }
+// };
 
 export const assignBugToUser = ({ bugId, userId }) =>
   apiCallBegan({
