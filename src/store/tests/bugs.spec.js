@@ -8,21 +8,43 @@ import configureStore from "../configureStore";
  * Social test (chỉ xem tổng thể behavior, ko xem xét chi tiết)
  */
 describe("bugsSlice", () => {
-  it("should handle the addBug action", async () => {
+  let fakeAxios;
+  let store;
+
+  beforeEach(() => {
+    fakeAxios = new MockAdapter(axios);
+    store = configureStore();
+  });
+
+  const bugsSlice = () => store.getState().entities.bugs;
+
+  it("should add the bug to the store if it's saved to the server", async () => {
+    // * Arrange
     const bug = { description: "a" };
     const savedBug = { ...bug, id: 1 };
-
-    const fakeAxios = new MockAdapter(axios);
     fakeAxios.onPost("/bugs").reply(200, savedBug);
 
-    // dispatch(addBug(bugData)) => then, look at our store
-    const store = configureStore();
-    const { dispatch, getState } = store;
+    // * Act
+    // Steps: dispatch(addBug(bugData)) => then, look at our store
+    await store.dispatch(addBug(bug));
+    console.log("MY BUG LIST", bugsSlice().list);
 
-    await dispatch(addBug(bug));
-    console.log("MY BUG LIST", getState().entities.bugs.list);
+    // * Assert
+    expect(bugsSlice().list).toContainEqual(savedBug);
+  });
 
-    expect(getState().entities.bugs.list).toContainEqual(savedBug);
+  it("should not add the bug to the store if it's not saved to the server", async () => {
+    // * Arrange
+    const bug = { description: "a" };
+    fakeAxios.onPost("/bugs").reply(500);
+
+    // * Act
+    // Steps: dispatch(addBug(bugData)) => then, look at our store
+    await store.dispatch(addBug(bug));
+    console.log("MY BUG LIST", bugsSlice().list);
+
+    // * Assert
+    expect(bugsSlice().list).toHaveLength(0);
   });
 });
 
