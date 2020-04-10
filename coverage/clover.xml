@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1586524424945" clover="3.2.0">
+  <project timestamp="1586524424946" name="All files">
+    <metrics statements="65" coveredstatements="41" conditionals="12" coveredconditionals="6" methods="36" coveredmethods="14" elements="113" coveredelements="61" complexity="0" loc="65" ncloc="65" packages="3" files="11" classes="11"/>
+    <package name="src">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="math.js" path="H:\ultimate-redux\src\math.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.store">
+      <metrics statements="45" coveredstatements="22" conditionals="2" coveredconditionals="0" methods="25" coveredmethods="3"/>
+      <file name="api.js" path="H:\ultimate-redux\src\store\api.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+      <file name="bugs.js" path="H:\ultimate-redux\src\store\bugs.js">
+        <metrics statements="33" coveredstatements="12" conditionals="2" coveredconditionals="0" methods="22" coveredmethods="2"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
+        <line num="106" count="1" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="128" count="1" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="137" count="0" type="stmt"/>
+      </file>
+      <file name="configureStore.js" path="H:\ultimate-redux\src\store\configureStore.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="12" count="2" type="stmt"/>
+      </file>
+      <file name="entities.js" path="H:\ultimate-redux\src\store\entities.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="projects.js" path="H:\ultimate-redux\src\store\projects.js">
+        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+      <file name="reducer.js" path="H:\ultimate-redux\src\store\reducer.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="users.js" path="H:\ultimate-redux\src\store\users.js">
+        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.store.middleware">
+      <metrics statements="19" coveredstatements="18" conditionals="10" coveredconditionals="6" methods="10" coveredmethods="10"/>
+      <file name="api.js" path="H:\ultimate-redux\src\store\middleware\api.js">
+        <metrics statements="12" coveredstatements="12" conditionals="8" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="38" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="1" falsecount="1"/>
+      </file>
+      <file name="logger.js" path="H:\ultimate-redux\src\store\middleware\logger.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+      </file>
+      <file name="toast.js" path="H:\ultimate-redux\src\store\middleware\toast.js">
+        <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
