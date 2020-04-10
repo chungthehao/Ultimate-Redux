@@ -130,7 +130,7 @@ const getBugs = (state) => state.entities.bugs;
 export const getUnresolvedBugs = createSelector(
   getBugs,
   (state) => state.entities.projects,
-  (bugs, projects) => bugs.filter((b) => !b.resolered) // Nếu bugs, projects ko đổi thì [[bugs.filter(b => !b.resolered)]] ko chạy lại mà lấy từ cache
+  (bugs, projects) => bugs.list.filter((b) => !b.resolved) // Nếu bugs, projects ko đổi thì [[bugs.filter(b => !b.resolered)]] ko chạy lại mà lấy từ cache
 );
 
 export const getBugsByUser = (userId) =>
