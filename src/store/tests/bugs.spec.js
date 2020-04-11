@@ -29,11 +29,26 @@ describe("bugsSlice", () => {
 
   describe("loading bugs", () => {
     describe("if the bugs exist in the cache", () => {
-      // they should come from the cache
+      it("they should not be fetched from the server again.", async () => {
+        fakeAxios.onGet("/bugs").reply(200, [{ id: 1 }]);
+
+        await store.dispatch(loadBugs());
+        await store.dispatch(loadBugs());
+
+        expect(fakeAxios.history.get.length).toBe(1);
+      });
     });
 
     describe("if the bugs don't exist in the cache", () => {
-      // they should be fetched from the server
+      it("they should be fetched from the server and put in the store", async () => {
+        const bugsDataOnServer = [{ id: 1 }, { id: 2 }];
+        fakeAxios.onGet("/bugs").reply(200, bugsDataOnServer);
+
+        await store.dispatch(loadBugs());
+
+        expect(bugsSlice().list).toHaveLength(bugsDataOnServer.length);
+      });
+
       describe("loading indicators", () => {
         it("should be true while fetching the bugs", () => {
           fakeAxios.onGet("/bugs").reply(() => {
