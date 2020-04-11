@@ -1,7 +1,7 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
-import { addBug, getUnresolvedBugs, resolveBug } from "../bugs";
+import { addBug, getUnresolvedBugs, resolveBug, loadBugs } from "../bugs";
 import configureStore from "../configureStore";
 
 /**
@@ -35,10 +35,32 @@ describe("bugsSlice", () => {
     describe("if the bugs don't exist in the cache", () => {
       // they should be fetched from the server
       describe("loading indicators", () => {
-        // * 3 tests
-        // - should be true while fetching
-        // - should be false after bugs are fetched
-        // - should be false if the server fails
+        it("should be true while fetching the bugs", () => {
+          fakeAxios.onGet("/bugs").reply(() => {
+            // Excute some code before the server return
+            expect(bugsSlice().loading).toBe(true);
+            // Server return
+            return [200, [{ id: 1 }]];
+          });
+
+          store.dispatch(loadBugs());
+        });
+
+        it("should be false after bugs are fetched", async () => {
+          fakeAxios.onGet("/bugs").reply(200, [{ id: 1 }]);
+
+          await store.dispatch(loadBugs());
+
+          expect(bugsSlice().loading).toBe(false);
+        });
+
+        it("should be false if the server returns an error", async () => {
+          fakeAxios.onGet("/bugs").reply(500);
+
+          await store.dispatch(loadBugs());
+
+          expect(bugsSlice().loading).toBe(false);
+        });
       });
     });
   });
@@ -52,7 +74,6 @@ describe("bugsSlice", () => {
     // * Act
     // Steps: dispatch(addBug(bugData)) => then, look at our store
     await store.dispatch(addBug(bug));
-    console.log("MY BUG LIST", bugsSlice().list);
 
     // * Assert
     expect(bugsSlice().list).toContainEqual(savedBug);
@@ -66,7 +87,6 @@ describe("bugsSlice", () => {
     // * Act
     // Steps: dispatch(addBug(bugData)) => then, look at our store
     await store.dispatch(addBug(bug));
-    console.log("MY BUG LIST", bugsSlice().list);
 
     // * Assert
     expect(bugsSlice().list).toHaveLength(0);
@@ -104,7 +124,6 @@ describe("bugsSlice", () => {
       ];
 
       const result = getUnresolvedBugs(state);
-      console.log("RESULT", result);
 
       expect(result).toHaveLength(2);
     });
