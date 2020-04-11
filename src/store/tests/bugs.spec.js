@@ -18,12 +18,29 @@ describe("bugsSlice", () => {
 
   const bugsSlice = () => store.getState().entities.bugs;
 
+  // Là hàm, mà ko phải 1 object trực tiếp ==> để mỗi lần chạy là trả về 1 obj mới, các test sẽ ko bị ảnh hưởng nhau
   const createState = () => ({
     entities: {
       bugs: {
         list: [],
       },
     },
+  });
+
+  describe("loading bugs", () => {
+    describe("if the bugs exist in the cache", () => {
+      // they should come from the cache
+    });
+
+    describe("if the bugs don't exist in the cache", () => {
+      // they should be fetched from the server
+      describe("loading indicators", () => {
+        // * 3 tests
+        // - should be true while fetching
+        // - should be false after bugs are fetched
+        // - should be false if the server fails
+      });
+    });
   });
 
   it("should add the bug to the store if it's saved to the server", async () => {
